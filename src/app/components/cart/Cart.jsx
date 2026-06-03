@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { FiX, FiMinus, FiPlus, FiTrash2, FiPhone } from 'react-icons/fi'
+import { FiX, FiMinus, FiPlus, FiTrash2 } from 'react-icons/fi'
 import { useCart } from '@/context/CartContext'
 import './cart.css'
 

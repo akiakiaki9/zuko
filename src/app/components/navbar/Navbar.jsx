@@ -108,11 +108,9 @@ export default function Navbar() {
       <div className={`mobile-menu ${isMobileMenuOpen ? 'active' : ''}`}>
         <div className="mobile-menu-header">
           <div className="mobile-logo">
-            <Image 
-              src="/logo.png" 
+            <img 
+              src="/images/logo.png" 
               alt="ZUKO Logo" 
-              width={40} 
-              height={40}
               className="mobile-brand-logo"
             />
             <div>

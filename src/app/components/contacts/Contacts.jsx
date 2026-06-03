@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { FiMapPin, FiPhone, FiClock, FiStar, FiSend, FiUser, FiMessageSquare, FiExternalLink } from 'react-icons/fi'
+import { FiMapPin, FiStar, FiSend, FiUser, FiMessageSquare, FiExternalLink } from 'react-icons/fi'
 import { BsInstagram } from 'react-icons/bs'
 import { FaStar } from 'react-icons/fa'
 import './contacts.css'
