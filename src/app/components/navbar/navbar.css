@@ -219,8 +219,9 @@
   right: 0;
 }
 
+/* Mobile Menu Header - Исправленный с уменьшенным логотипом */
 .mobile-menu-header {
-  padding: 20px;
+  padding: 16px;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white;
   display: flex;
@@ -231,25 +232,27 @@
 .mobile-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .mobile-brand-logo {
+  width: 32px;
+  height: 32px;
   background: white;
-  border-radius: 10px;
-  padding: 6px;
+  border-radius: 8px;
+  padding: 4px;
   object-fit: contain;
 }
 
 .mobile-logo-text {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   display: block;
   line-height: 1.2;
 }
 
 .mobile-logo-tag {
-  font-size: 9px;
+  font-size: 8px;
   opacity: 0.9;
   display: block;
 }
@@ -259,7 +262,7 @@
   border: none;
   color: white;
   cursor: pointer;
-  padding: 8px;
+  padding: 6px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -272,6 +275,12 @@
   transform: rotate(90deg);
 }
 
+.mobile-close-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Mobile Menu Links */
 .mobile-menu-links {
   padding: 20px;
   display: flex;
@@ -466,5 +475,59 @@
   
   .logo-text {
     font-size: 18px;
+  }
+  
+  /* Еще меньше логотип на маленьких экранах */
+  .mobile-menu-header {
+    padding: 12px;
+  }
+  
+  .mobile-brand-logo {
+    width: 28px;
+    height: 28px;
+    padding: 3px;
+    border-radius: 6px;
+  }
+  
+  .mobile-logo {
+    gap: 8px;
+  }
+  
+  .mobile-logo-text {
+    font-size: 16px;
+  }
+  
+  .mobile-logo-tag {
+    font-size: 7px;
+  }
+  
+  .mobile-close-btn {
+    padding: 5px;
+  }
+  
+  .mobile-close-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .mobile-menu-header {
+    padding: 10px;
+  }
+  
+  .mobile-brand-logo {
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    border-radius: 5px;
+  }
+  
+  .mobile-logo-text {
+    font-size: 14px;
+  }
+  
+  .mobile-logo-tag {
+    font-size: 6px;
   }
 }

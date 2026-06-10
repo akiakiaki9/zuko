@@ -9,14 +9,14 @@ const menuItems = [
   // Burgerlar
   { id: 1, name: 'ZUKO Burger', description: 'Ikkita go\'sht kotleti, salat, pomidor, sous', price: 32000, category: 'burger', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&h=300&fit=crop', popular: true },
   { id: 2, name: 'Cheese Burger', description: 'Ikkita go\'sht kotleti, qo\'shaloq pishloq', price: 28000, category: 'burger', image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=300&h=300&fit=crop', popular: true },
-  { id: 3, name: 'Chicken Burger', description: 'Tovuq kotleti, salat, mayonez', price: 25000, category: 'burger', image: 'https://images.unsplash.com/photo-1606755962773-d324e428e147?w=300&h=300&fit=crop' },
+  { id: 3, name: 'Chicken Burger', description: 'Tovuq kotleti, salat, mayonez', price: 25000, category: 'burger', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZk7eTwSX46LTR6A0FHQTlHO5Dq9VjZsgNJg&s' },
   { id: 4, name: 'Double Burger', description: 'Ikkita go\'sht kotleti, qo\'shaloq pishloq, bekon', price: 38000, category: 'burger', image: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=300&h=300&fit=crop', popular: true },
   
   // Lavash
-  { id: 5, name: 'Lavash Classic', description: 'Go\'sht, pomidor, bodring, sous, lavash', price: 22000, category: 'lavash', image: 'https://images.unsplash.com/photo-1653732515645-8ce62f4b431a?w=300&h=300&fit=crop', popular: true },
+  { id: 5, name: 'Lavash Classic', description: 'Go\'sht, pomidor, bodring, sous, lavash', price: 22000, category: 'lavash', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQulVgOpjdSpsszZ_esSpbPjApIZA0kK2flKw&s', popular: true },
   { id: 6, name: 'Lavash Chicken', description: 'Tovuq, pomidor, bodring, sous, lavash', price: 20000, category: 'lavash', image: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=300&h=300&fit=crop', popular: true },
   { id: 7, name: 'Lavash Cheese', description: 'Go\'sht, qo\'shaloq pishloq, sous, lavash', price: 24000, category: 'lavash', image: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=300&h=300&fit=crop' },
-  { id: 8, name: 'Mini Lavash', description: 'Kichik lavash, go\'sht, sous', price: 15000, category: 'lavash', image: 'https://images.unsplash.com/photo-1653732515645-8ce62f4b431a?w=300&h=300&fit=crop' },
+  { id: 8, name: 'Mini Lavash', description: 'Kichik lavash, go\'sht, sous', price: 15000, category: 'lavash', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnaMwduGY78Epi5u8F0nAJOT2hyJrXCcCTzA&s' },
   
   // Pizza
   { id: 9, name: 'Pepperoni Pizza', description: 'Pepperoni, pishloq, pomidor sousi', price: 45000, category: 'pizza', image: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=300&h=300&fit=crop', popular: true },
@@ -34,11 +34,11 @@ const menuItems = [
   { id: 17, name: 'Coca-Cola', description: '0.5l', price: 8000, category: 'drinks', image: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=300&h=300&fit=crop' },
   { id: 18, name: 'Fanta', description: '0.5l', price: 8000, category: 'drinks', image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=300&h=300&fit=crop' },
   { id: 19, name: 'Sprite', description: '0.5l', price: 8000, category: 'drinks', image: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=300&h=300&fit=crop' },
-  { id: 20, name: 'Suv', description: '0.5l', price: 5000, category: 'drinks', image: 'https://images.unsplash.com/photo-1616118132534-3812c00c2f66?w=300&h=300&fit=crop' },
+  { id: 20, name: 'Suv', description: '0.5l', price: 5000, category: 'drinks', image: 'https://s.optlist.ru/i/67/38/16702724b9524ee7-6738-1.jpg' },
   
   // Kombo
   { id: 21, name: 'ZUKO Combo', description: 'Burger + Kartoshka + Cola', price: 45000, category: 'combo', image: 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=300&h=300&fit=crop', popular: true },
-  { id: 22, name: 'Family Combo', description: '2 Burger + Kartoshka + 2 Cola + Nuggets', price: 85000, category: 'combo', image: 'https://images.unsplash.com/photo-1606755962773-d324e428e147?w=300&h=300&fit=crop', popular: true },
+  { id: 22, name: 'Family Combo', description: '2 Burger + Kartoshka + 2 Cola + Nuggets', price: 85000, category: 'combo', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeMpMQFON-dqkNl0iGYyqiPxThf-DYwDIFRA&s', popular: true },
   { id: 23, name: 'Student Combo', description: 'Burger + Kartoshka + Cola', price: 35000, category: 'combo', image: 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=300&h=300&fit=crop' },
 ]
 

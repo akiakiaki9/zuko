@@ -1,9 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { FiMapPin, FiStar, FiSend, FiUser, FiMessageSquare, FiExternalLink } from 'react-icons/fi'
+import { FiMapPin, FiStar, FiSend, FiUser, FiMessageSquare, FiExternalLink, FiThumbsUp, FiAward, FiHeart } from 'react-icons/fi'
 import { BsInstagram } from 'react-icons/bs'
-import { FaStar } from 'react-icons/fa'
+import { FaStar, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination, Autoplay, Navigation } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 import './contacts.css'
 
 export default function Contacts() {
@@ -14,6 +19,7 @@ export default function Contacts() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [reviews, setReviews] = useState([])
   const [submitMessage, setSubmitMessage] = useState('')
+  const [averageRating, setAverageRating] = useState(0)
 
   // Координаты ресторана
   const coordinates = {
@@ -27,7 +33,9 @@ export default function Contacts() {
   useEffect(() => {
     const savedReviews = localStorage.getItem('zuko-reviews')
     if (savedReviews) {
-      setReviews(JSON.parse(savedReviews))
+      const loadedReviews = JSON.parse(savedReviews)
+      setReviews(loadedReviews)
+      calculateAverageRating(loadedReviews)
     } else {
       const demoReviews = [
         {
@@ -35,27 +43,41 @@ export default function Contacts() {
           name: 'Sarvar',
           rating: 5,
           text: 'Juda mazali burgerlar! Tez yetkazib berishdi. Albatta qaytaman.',
-          date: '2024-01-15'
+          date: '2024-01-15',
+          likes: 12,
+          verified: true
         },
         {
           id: 2,
           name: 'Dilnoza',
           rating: 4,
           text: 'Lavash ajoyib edi. Kartoshka ham mazali. Tavsiya qilaman!',
-          date: '2024-01-14'
+          date: '2024-01-14',
+          likes: 8,
+          verified: true
         },
         {
           id: 3,
           name: 'Jasur',
           rating: 5,
           text: 'Eng yaxshi fastfud. Pizza ham juda mazali chiqadi.',
-          date: '2024-01-13'
+          date: '2024-01-13',
+          likes: 15,
+          verified: true
         }
       ]
       setReviews(demoReviews)
       localStorage.setItem('zuko-reviews', JSON.stringify(demoReviews))
+      calculateAverageRating(demoReviews)
     }
   }, [])
+
+  const calculateAverageRating = (reviewsList) => {
+    if (reviewsList.length === 0) return 0
+    const sum = reviewsList.reduce((acc, review) => acc + review.rating, 0)
+    const avg = sum / reviewsList.length
+    setAverageRating(avg)
+  }
 
   const handleSubmitReview = async (e) => {
     e.preventDefault()
@@ -100,12 +122,15 @@ export default function Contacts() {
           name: userName,
           rating: rating,
           text: reviewText,
-          date: currentDate
+          date: currentDate,
+          likes: 0,
+          verified: false
         }
         
         const updatedReviews = [newReview, ...reviews]
         setReviews(updatedReviews)
         localStorage.setItem('zuko-reviews', JSON.stringify(updatedReviews))
+        calculateAverageRating(updatedReviews)
         
         setRating(0)
         setReviewText('')
@@ -131,6 +156,14 @@ export default function Contacts() {
     window.open(url, '_blank')
   }
 
+  const handleLike = (reviewId) => {
+    const updatedReviews = reviews.map(review => 
+      review.id === reviewId ? { ...review, likes: (review.likes || 0) + 1 } : review
+    )
+    setReviews(updatedReviews)
+    localStorage.setItem('zuko-reviews', JSON.stringify(updatedReviews))
+  }
+
   const locations = [
     {
       name: '1-Filial',
@@ -146,7 +179,7 @@ export default function Contacts() {
     }
   ]
 
-  const renderStars = (ratingValue, interactive = false) => {
+  const renderStars = (ratingValue, interactive = false, size = 16) => {
     const stars = []
     for (let i = 1; i <= 5; i++) {
       stars.push(
@@ -156,7 +189,7 @@ export default function Contacts() {
           onClick={() => interactive && setRating(i)}
           onMouseEnter={() => interactive && setHoverRating(i)}
           onMouseLeave={() => interactive && setHoverRating(0)}
-          size={interactive ? 28 : 16}
+          size={interactive ? 28 : size}
         />
       )
     }
@@ -209,7 +242,6 @@ export default function Contacts() {
             </button>
           </div>
           
-          {/* iframe карта с меткой */}
           <iframe
             src={`https://yandex.uz/map-widget/v1/?ll=${coordinates.lng}%2C${coordinates.lat}&z=17&pt=${coordinates.lng}%2C${coordinates.lat}%2Cpm2rdm&l=map`}
             width="100%"
@@ -236,58 +268,69 @@ export default function Contacts() {
           </div>
         </div>
 
-        {/* Форма для отзывов и оценок */}
+        {/* Форма для отзывов и оценок - УЛУЧШЕННАЯ */}
         <div className="reviews-section">
           <div className="reviews-header">
+            <div className="rating-summary">
+              <div className="average-rating">
+                <div className="rating-number">{averageRating.toFixed(1)}</div>
+                <div className="rating-stars-big">
+                  {renderStars(Math.round(averageRating), false, 20)}
+                </div>
+                <div className="rating-count">{reviews.length} ta fikr</div>
+              </div>
+              <div className="rating-badge">
+                <FiAward size={24} />
+                <div>
+                  <strong>4.8/5</strong>
+                  <span>Mijozlar bahosi</span>
+                </div>
+              </div>
+            </div>
             <h3>⭐ Mijozlar fikrlari</h3>
             <p>Sizning fikringiz biz uchun muhim</p>
           </div>
 
           <div className="review-form-container">
+            <div className="form-title">
+              <FiHeart className="form-title-icon" />
+              <span>Fikr bildirish</span>
+            </div>
             <form onSubmit={handleSubmitReview} className="review-form">
-              <div className="form-group">
-                <label>
-                  <FiUser size={16} />
-                  Ismingiz
-                </label>
-                <input
-                  type="text"
-                  placeholder="Ismingizni kiriting"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  required
-                />
-              </div>
-              
-              <div className="form-group">
-                <label>
-                  <FiStar size={16} />
-                  Baho bering
-                </label>
-                <div className="rating-stars">
-                  {renderStars(rating, true)}
-                  <span className="rating-text">
-                    {rating === 0 ? 'Baho tanlang' : `${rating} / 5`}
-                  </span>
+              <div className="form-row">
+                <div className="form-group">
+                  <input
+                    type="text"
+                    placeholder="Ismingiz"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    required
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <div className="rating-stars">
+                    <span className="rating-label">Baho:</span>
+                    {renderStars(rating, true)}
+                    <span className="rating-text">
+                      {rating === 0 ? 'Tanlang' : `${rating} / 5`}
+                    </span>
+                  </div>
                 </div>
               </div>
               
               <div className="form-group">
-                <label>
-                  <FiMessageSquare size={16} />
-                  Fikringiz
-                </label>
                 <textarea
                   placeholder="Biz haqimizda fikringizni yozing..."
                   value={reviewText}
                   onChange={(e) => setReviewText(e.target.value)}
-                  rows="4"
+                  rows="3"
                   required
                 />
               </div>
               
               <button type="submit" className="submit-review-btn" disabled={isSubmitting}>
-                <FiSend size={18} />
+                <FiSend size={16} />
                 {isSubmitting ? 'Yuborilmoqda...' : 'Fikr bildirish'}
               </button>
               
@@ -299,30 +342,65 @@ export default function Contacts() {
             </form>
           </div>
 
-          {/* Список отзывов */}
+          {/* Список отзывов - КАРУСЕЛЬ */}
           <div className="reviews-list">
-            <h4>So‘nggi fikrlar ({reviews.length})</h4>
-            <div className="reviews-grid">
+            <div className="reviews-header-row">
+              <h4>So‘nggi fikrlar</h4>
+              <div className="reviews-count">{reviews.length} ta</div>
+            </div>
+            
+            <Swiper
+              modules={[Pagination, Autoplay, Navigation]}
+              spaceBetween={20}
+              slidesPerView={1}
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 4000, disableOnInteraction: false }}
+              navigation={true}
+              breakpoints={{
+                640: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+              }}
+              className="reviews-swiper"
+            >
               {reviews.map((review) => (
-                <div key={review.id} className="review-card">
-                  <div className="review-header">
-                    <div className="reviewer-info">
-                      <div className="reviewer-avatar">
-                        {review.name.charAt(0).toUpperCase()}
-                      </div>
-                      <div>
-                        <strong>{review.name}</strong>
-                        <div className="review-stars">
-                          {renderStars(review.rating)}
+                <SwiperSlide key={review.id}>
+                  <div className="review-card">
+                    <FaQuoteLeft className="quote-icon left" />
+                    <div className="review-header">
+                      <div className="reviewer-info">
+                        <div className="reviewer-avatar" style={{ background: `linear-gradient(135deg, var(--primary), ${review.rating >= 4 ? 'var(--secondary)' : '#999'})` }}>
+                          {review.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div>
+                          <strong>{review.name}</strong>
+                          {review.verified && (
+                            <span className="verified-badge">
+                              <FiThumbsUp size={10} /> Tasdiqlangan
+                            </span>
+                          )}
+                          <div className="review-stars">
+                            {renderStars(review.rating, false, 12)}
+                          </div>
                         </div>
                       </div>
+                      <span className="review-date">{review.date}</span>
                     </div>
-                    <span className="review-date">{review.date}</span>
+                    <p className="review-text">{review.text}</p>
+                    <div className="review-footer">
+                      <button 
+                        className="like-btn"
+                        onClick={() => handleLike(review.id)}
+                      >
+                        <FiThumbsUp size={14} />
+                        <span>{review.likes || 0}</span>
+                      </button>
+                    </div>
+                    <FaQuoteRight className="quote-icon right" />
                   </div>
-                  <p className="review-text">{review.text}</p>
-                </div>
+                </SwiperSlide>
               ))}
-            </div>
+            </Swiper>
           </div>
         </div>
 
