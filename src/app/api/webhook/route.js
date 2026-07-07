@@ -24,8 +24,7 @@ export async function POST(request) {
           text: '🍔 ZUKO - Ta\'mni his qil!\n\n👇 Quyidagi tugmalardan birini bosing:',
           reply_markup: {
             inline_keyboard: [
-              [{ text: '🌐 Saytni ochish', url: SITE_URL }],
-              [{ text: '📞 Buyurtma berish', url: 'https://zuko-eight.vercel.app/' }],
+              [{ text: '📞 Buyurtma berish', url: 'https://zuko-eight.vercel.app/#menu' }],
               [{ text: '📸 Instagram', url: 'https://instagram.com/zukouzbekistan' }]
             ]
           }

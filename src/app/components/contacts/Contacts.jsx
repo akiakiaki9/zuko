@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { FiMapPin, FiStar, FiSend, FiUser, FiMessageSquare, FiExternalLink, FiThumbsUp, FiAward, FiHeart } from 'react-icons/fi'
+import { FiMapPin, FiSend, FiExternalLink, FiThumbsUp, FiAward, FiHeart } from 'react-icons/fi'
 import { BsInstagram } from 'react-icons/bs'
 import { FaStar, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -268,7 +268,7 @@ export default function Contacts() {
           </div>
         </div>
 
-        {/* Форма для отзывов и оценок - УЛУЧШЕННАЯ */}
+        {/* Форма для отзывов и оценок */}
         <div className="reviews-section">
           <div className="reviews-header">
             <div className="rating-summary">
@@ -349,58 +349,60 @@ export default function Contacts() {
               <div className="reviews-count">{reviews.length} ta</div>
             </div>
             
-            <Swiper
-              modules={[Pagination, Autoplay, Navigation]}
-              spaceBetween={20}
-              slidesPerView={1}
-              pagination={{ clickable: true }}
-              autoplay={{ delay: 4000, disableOnInteraction: false }}
-              navigation={true}
-              breakpoints={{
-                640: { slidesPerView: 1 },
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 }
-              }}
-              className="reviews-swiper"
-            >
-              {reviews.map((review) => (
-                <SwiperSlide key={review.id}>
-                  <div className="review-card">
-                    <FaQuoteLeft className="quote-icon left" />
-                    <div className="review-header">
-                      <div className="reviewer-info">
-                        <div className="reviewer-avatar" style={{ background: `linear-gradient(135deg, var(--primary), ${review.rating >= 4 ? 'var(--secondary)' : '#999'})` }}>
-                          {review.name.charAt(0).toUpperCase()}
-                        </div>
-                        <div>
-                          <strong>{review.name}</strong>
-                          {review.verified && (
-                            <span className="verified-badge">
-                              <FiThumbsUp size={10} /> Tasdiqlangan
-                            </span>
-                          )}
-                          <div className="review-stars">
-                            {renderStars(review.rating, false, 12)}
+            <div className="swiper-wrapper">
+              <Swiper
+                modules={[Pagination, Autoplay, Navigation]}
+                spaceBetween={20}
+                slidesPerView={1}
+                pagination={{ clickable: true }}
+                autoplay={{ delay: 4000, disableOnInteraction: false }}
+                navigation={true}
+                breakpoints={{
+                  640: { slidesPerView: 1 },
+                  768: { slidesPerView: 2 },
+                  1024: { slidesPerView: 3 }
+                }}
+                className="reviews-swiper"
+              >
+                {reviews.map((review) => (
+                  <SwiperSlide key={review.id}>
+                    <div className="review-card">
+                      <FaQuoteLeft className="quote-icon left" />
+                      <div className="review-header">
+                        <div className="reviewer-info">
+                          <div className="reviewer-avatar" style={{ background: `linear-gradient(135deg, var(--primary), ${review.rating >= 4 ? 'var(--secondary)' : '#999'})` }}>
+                            {review.name.charAt(0).toUpperCase()}
+                          </div>
+                          <div>
+                            <strong>{review.name}</strong>
+                            {review.verified && (
+                              <span className="verified-badge">
+                                <FiThumbsUp size={10} /> Tasdiqlangan
+                              </span>
+                            )}
+                            <div className="review-stars">
+                              {renderStars(review.rating, false, 12)}
+                            </div>
                           </div>
                         </div>
+                        <span className="review-date">{review.date}</span>
                       </div>
-                      <span className="review-date">{review.date}</span>
+                      <p className="review-text">{review.text}</p>
+                      <div className="review-footer">
+                        <button 
+                          className="like-btn"
+                          onClick={() => handleLike(review.id)}
+                        >
+                          <FiThumbsUp size={14} />
+                          <span>{review.likes || 0}</span>
+                        </button>
+                      </div>
+                      <FaQuoteRight className="quote-icon right" />
                     </div>
-                    <p className="review-text">{review.text}</p>
-                    <div className="review-footer">
-                      <button 
-                        className="like-btn"
-                        onClick={() => handleLike(review.id)}
-                      >
-                        <FiThumbsUp size={14} />
-                        <span>{review.likes || 0}</span>
-                      </button>
-                    </div>
-                    <FaQuoteRight className="quote-icon right" />
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
         </div>
 

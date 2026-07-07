@@ -439,9 +439,21 @@
   font-weight: 500;
 }
 
-/* Swiper Styles */
+/* Swiper Styles - ИСПРАВЛЕННЫЙ без скроллбара */
+.swiper-wrapper {
+  overflow: hidden !important;
+}
+
 .reviews-swiper {
   padding: 10px 0 50px !important;
+  overflow: hidden !important;
+}
+
+.reviews-swiper .swiper-wrapper {
+  overflow: visible !important;
+}
+
+.reviews-swiper .swiper-slide {
   overflow: visible !important;
 }
 
@@ -935,4 +947,13 @@
   .location-card {
     min-width: 200px;
   }
+}
+
+/* Дополнительные фиксы для скрытия скроллбара */
+.reviews-swiper .swiper-wrapper {
+  overflow: visible !important;
+}
+
+.reviews-swiper .swiper-slide {
+  height: auto !important;
 }

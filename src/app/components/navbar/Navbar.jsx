@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { FiShoppingBag, FiMenu, FiX, FiPhone, FiHome, FiGrid, FiMail, FiMapPin, FiClock } from 'react-icons/fi'
 import { useCart } from '@/context/CartContext'
 import './navbar.css'
-import Image from 'next/image'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -61,7 +60,6 @@ export default function Navbar() {
                   src="/images/logo.png" 
                   alt="ZUKO Logo"
                   className="brand-logo"
-                  priority
                 />
               </div>
               <div className="logo-text-wrapper">

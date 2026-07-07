@@ -3,8 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { FiMapPin, FiClock, FiPhone, FiArrowRight } from 'react-icons/fi'
 import { BsInstagram } from 'react-icons/bs'
-import { GiHamburger, GiFrenchFries, GiCupcake } from 'react-icons/gi'
-import { FaHamburger } from 'react-icons/fa'
+import { GiHamburger } from 'react-icons/gi'
 import './header.css'
 
 export default function Header() {
@@ -85,20 +84,20 @@ export default function Header() {
 
           <div className="header-right animate-on-load">
             <div className="hero-image">
-              <div className="floating-elements">
-                <div className="float-1">
-                  <GiHamburger size={32} />
-                </div>
-                <div className="float-2">
-                  <GiFrenchFries size={28} />
-                </div>
-                <div className="float-3">
-                  <GiCupcake size={30} />
-                </div>
+              <div className="hero-burger-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&h=600&fit=crop"
+                  alt="ZUKO Burger"
+                  className="hero-burger-img"
+                />
+                <div className="hero-burger-shadow"></div>
               </div>
-              <div className="hero-circle"></div>
-              <div className="hero-burger">
-                <FaHamburger size={140} />
+              {/* Плавающие элементы */}
+              <div className="floating-elements">
+                <div className="float-1">🍟</div>
+                <div className="float-2">🥤</div>
+                <div className="float-3">🧀</div>
+                <div className="float-4">🌶️</div>
               </div>
             </div>
           </div>
