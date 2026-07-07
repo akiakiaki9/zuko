@@ -7,7 +7,6 @@ export async function POST(request) {
   try {
     const body = await request.json()
     
-    // Логируем входящее сообщение (будет видно в Vercel)
     console.log('📩 Получено сообщение:', JSON.stringify(body, null, 2))
     
     if (body.message) {
@@ -16,7 +15,7 @@ export async function POST(request) {
       
       console.log(`👤 Пользователь ${chatId} написал: ${text}`)
       
-      // Отправляем ответ
+      // Отправляем ответ с КОРРЕКТНЫМИ ссылками
       const response = await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -26,7 +25,7 @@ export async function POST(request) {
           reply_markup: {
             inline_keyboard: [
               [{ text: '🌐 Saytni ochish', url: SITE_URL }],
-              [{ text: '📞 Buyurtma berish', url: 'tel:+998992502299' }],
+              [{ text: '📞 Buyurtma berish', url: 'https://zuko-eight.vercel.app/' }],
               [{ text: '📸 Instagram', url: 'https://instagram.com/zukouzbekistan' }]
             ]
           }
@@ -50,7 +49,6 @@ export async function POST(request) {
   }
 }
 
-// Добавляем обработку GET для теста
 export async function GET() {
   return NextResponse.json({ 
     status: 'ok', 
