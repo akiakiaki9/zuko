@@ -6,18 +6,17 @@ const SITE_URL = 'https://zuko-eight.vercel.app/'
 export async function POST(request) {
     try {
         const body = await request.json()
+        console.log('Received:', body)
 
-        // Если есть сообщение
         if (body.message) {
             const chatId = body.message.chat.id
 
-            // Отправляем ответ с кнопками
             await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     chat_id: chatId,
-                    text: '🍔 ZUKO - Ta\'mni his qil!\n\n👇 Quyidagi tugmalardan birini bosing:',
+                    text: '🍔 ZUKO - Ta\'mni his qil!',
                     reply_markup: {
                         inline_keyboard: [
                             [{ text: '🌐 Saytni ochish', url: SITE_URL }],
